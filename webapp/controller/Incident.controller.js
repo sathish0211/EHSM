@@ -27,21 +27,7 @@ sap.ui.define([
 
             var aFilters = [new Filter("EmployeeId", FilterOperator.EQ, sEmpId)];
 
-            // UI Filters
-            var sQuery = this.byId("searchField").getValue();
-            if (sQuery) {
-                aFilters.push(new Filter("IncidentDescription", FilterOperator.Contains, sQuery));
-            }
 
-            var sStatus = this.byId("selectStatus").getSelectedKey();
-            if (sStatus) {
-                aFilters.push(new Filter("IncidentStatus", FilterOperator.EQ, sStatus));
-            }
-
-            var sPriority = this.byId("selectPriority").getSelectedKey();
-            if (sPriority) {
-                aFilters.push(new Filter("IncidentPriority", FilterOperator.EQ, sPriority));
-            }
 
             var oTable = this.byId("incidentTable");
             oTable.setBusy(true);
@@ -85,13 +71,7 @@ sap.ui.define([
             this._loadData();
         },
 
-        onSearch: function () {
-            this._loadData();
-        },
 
-        onFilterSelect: function () {
-            this._loadData();
-        },
 
         onNavBack: function () {
             this.getRouter().navTo("Dashboard");
