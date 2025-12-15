@@ -3,6 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
     xmlns:form="sap.ui.layout.form"
     height="100%">
     <Page showHeader="false" class="loginPage">
@@ -12,7 +13,7 @@
             justifyContent="Center">
             <f:Card class="sapUiMediumMargin" width="400px">
                 <f:header>
-                    <f:Header title="EHSM Safety Portal" subtitle="Login to continue" icon="sap-icon://shield"/>
+                    <card:Header title="EHSM Safety Portal" subtitle="Login to continue" icon="sap-icon://shield"/>
                 </f:header>
                 <f:content>
                     <VBox class="sapUiLargeMargin">
