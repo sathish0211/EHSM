@@ -12,34 +12,20 @@
         <content>
             <l:VerticalLayout width="100%" class="sapUiMediumMargin">
                 <Title text="Key Performance Indicators" level="H2" class="sapUiSmallMarginBottom"/>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Incidents" subheader="Total" press="onPressIncidents">
-                    <TileContent>
-                        <NumericContent value="{dashboard>/totalIncidents}" icon="sap-icon://alert" valueColor="Critical"/>
-                    </TileContent>
-                </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Open Incidents" subheader="Action Required" press="onPressIncidents">
-                    <TileContent>
-                         <NumericContent value="{dashboard>/openIncidents}" icon="sap-icon://clipboard" valueColor="Error"/>
-                    </TileContent>
-                </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Risks" subheader="Total Assessments" press="onPressRisks">
-                    <TileContent>
-                        <NumericContent value="{dashboard>/totalRisks}" icon="sap-icon://quality-issue" valueColor="Good"/>
-                    </TileContent>
-                </GenericTile>
-                 <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="High Risks" subheader="Mitigation Needed" press="onPressRisks">
-                    <TileContent>
-                        <NumericContent value="{dashboard>/highRisks}" icon="sap-icon://warning" valueColor="Error"/>
-                    </TileContent>
-                </GenericTile>
-            </l:VerticalLayout>
+                
+                <HBox justifyContent="Center" wrap="Wrap" alignItems="Center">
+                    <GenericTile class="sapUiMediumMarginEnd" header="Incidents" subheader="Total" press="onPressIncidents">
+                        <TileContent>
+                            <NumericContent value="{dashboard>/totalIncidents}" icon="sap-icon://alert" valueColor="Critical"/>
+                        </TileContent>
+                    </GenericTile>
 
-            <l:VerticalLayout width="100%" class="sapUiMediumMargin">
-                 <Title text="Quick Access" level="H2" class="sapUiSmallMarginBottom"/>
-                 <HBox>
-                    <Button text="Manage Incidents" type="Emphasized" icon="sap-icon://alert" class="sapUiSmallMarginEnd" press="onPressIncidents" width="200px"/>
-                    <Button text="Risk Assessment" type="Emphasized" icon="sap-icon://quality-issue" class="sapUiSmallMarginEnd" press="onPressRisks" width="200px"/>
-                 </HBox>
+                    <GenericTile header="Risks" subheader="Total Assessments" press="onPressRisks">
+                        <TileContent>
+                            <NumericContent value="{dashboard>/totalRisks}" icon="sap-icon://quality-issue" valueColor="Good"/>
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
             </l:VerticalLayout>
         </content>
     </Page>
