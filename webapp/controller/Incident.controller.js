@@ -21,6 +21,7 @@ sap.ui.define([
         },
 
         _loadData: function () {
+            var oModel = this.getOwnerComponent().getModel();
             var oSessionModel = this.getOwnerComponent().getModel("session");
             var sEmpId = oSessionModel ? oSessionModel.getProperty("/EmployeeId") : "00000001";
 
@@ -43,34 +44,45 @@ sap.ui.define([
             }
 
             var oTable = this.byId("incidentTable");
+            oTable.setBusy(true);
 
-            // Check if already bound
-            if (!oTable.getBinding("items")) {
-                oTable.bindItems({
-                    path: "/ZSG_EHSM_INCIDENTSet",
-                    template: new sap.m.ColumnListItem({
-                        cells: [
-                            new sap.m.ObjectIdentifier({ title: "{IncidentId}" }),
-                            new sap.m.Text({ text: "{IncidentDescription}" }),
-                            new sap.m.Text({ text: "{IncidentCategory}" }),
-                            new sap.m.ObjectStatus({ text: "{IncidentPriority}", state: { path: "IncidentPriority", formatter: function (sVal) { return sVal === 'High' ? 'Error' : sVal === 'Medium' ? 'Warning' : 'Success'; } } }),
-                            new sap.m.ObjectStatus({ text: "{IncidentStatus}", state: { path: "IncidentStatus", formatter: function (sVal) { return sVal === 'New' ? 'Error' : sVal === 'In Progress' ? 'Warning' : 'Success'; } } }),
-                            new sap.m.Text({ text: { path: "IncidentDate", type: "sap.ui.model.type.Date", formatOptions: { style: "medium" } } }),
-                            new sap.m.Text({ text: "{Plant}" })
-                        ]
-                    }),
-                    filters: aFilters
-                });
-            } else {
-                oTable.getBinding("items").filter(aFilters);
-            }
+            // Backend sends duplicate keys in __metadata, so we must use JSONModel to avoid UI5 merging everything into one row
+            var that = this;
+            oModel.read("/ZSG_EHSM_INCIDENTSet", {
+                filters: aFilters,
+                success: function (oData) {
+                    oTable.setBusy(false);
+                    var oJsonModel = new sap.ui.model.json.JSONModel();
+                    oJsonModel.setData({ results: oData.results });
+                    that.getView().setModel(oJsonModel, "incidents");
+
+                    // Bind if not bound
+                    if (!oTable.getBinding("items")) {
+                        oTable.bindItems({
+                            path: "incidents>/results",
+                            template: new sap.m.ColumnListItem({
+                                cells: [
+                                    new sap.m.ObjectIdentifier({ title: "{incidents>IncidentId}" }),
+                                    new sap.m.Text({ text: "{incidents>IncidentDescription}" }),
+                                    new sap.m.Text({ text: "{incidents>IncidentCategory}" }),
+                                    new sap.m.ObjectStatus({ text: "{incidents>IncidentPriority}", state: { path: "incidents>IncidentPriority", formatter: function (sVal) { return sVal === 'High' ? 'Error' : sVal === 'Medium' ? 'Warning' : 'Success'; } } }),
+                                    new sap.m.ObjectStatus({ text: "{incidents>IncidentStatus}", state: { path: "incidents>IncidentStatus", formatter: function (sVal) { return sVal === 'New' ? 'Error' : sVal === 'In Progress' ? 'Warning' : 'Success'; } } }),
+                                    new sap.m.Text({ text: { path: "incidents>IncidentDate", type: "sap.ui.model.type.Date", formatOptions: { style: "medium" } } }),
+                                    new sap.m.Text({ text: "{incidents>Plant}" })
+                                ]
+                            })
+                        });
+                    }
+                },
+                error: function (oError) {
+                    oTable.setBusy(false);
+                    sap.m.MessageToast.show("Failed to load incidents");
+                }
+            });
         },
 
         onRefresh: function () {
-            var oTable = this.byId("incidentTable");
-            if (oTable.getBinding("items")) {
-                oTable.getBinding("items").refresh(true);
-            }
+            this._loadData();
         },
 
         onSearch: function () {
