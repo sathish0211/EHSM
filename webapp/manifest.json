@@ -5,24 +5,18 @@
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
-      "version": "0.0.1"
+      "version": "1.0.0"
     },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.20.0",
-      "toolsId": "c87b3082-927a-48ba-96d5-89c8df1c1867"
-    },
     "dataSources": {
       "mainService": {
         "uri": "/sap/opu/odata/sap/ZSG_EHSM_ODATA_890_SRV/",
         "type": "OData",
         "settings": {
-          "annotations": [],
-          "localUri": "localService/mainService/metadata.xml",
-          "odataVersion": "2.0"
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
         }
       }
     }
@@ -44,12 +38,19 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "ehsm.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
     "dependencies": {
-      "minUI5Version": "1.120.14",
+      "minUI5Version": "1.65.6",
       "libs": {
-        "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.layout": {},
+        "sap.ui.core": {},
+        "sap.m": {}
       }
     },
     "contentDensities": {
@@ -66,7 +67,96 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "useBatch": false
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "ehsm.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "Login",
+          "pattern": "",
+          "target": [
+            "Login"
+          ]
+        },
+        {
+          "name": "Dashboard",
+          "pattern": "dashboard",
+          "target": [
+            "Dashboard"
+          ]
+        },
+        {
+          "name": "Profile",
+          "pattern": "profile",
+          "target": [
+            "Profile"
+          ]
+        },
+        {
+          "name": "Incident",
+          "pattern": "incident",
+          "target": [
+            "Incident"
+          ]
+        },
+        {
+          "name": "Risk",
+          "pattern": "risk",
+          "target": [
+            "Risk"
+          ]
+        }
+      ],
+      "targets": {
+        "Login": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Login",
+          "viewName": "Login"
+        },
+        "Dashboard": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Dashboard",
+          "viewName": "Dashboard"
+        },
+        "Profile": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Profile",
+          "viewName": "Profile"
+        },
+        "Incident": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Incident",
+          "viewName": "Incident"
+        },
+        "Risk": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Risk",
+          "viewName": "Risk"
+        }
       }
     },
     "resources": {
@@ -75,40 +165,6 @@
           "uri": "css/style.css"
         }
       ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "transition": "slide",
-        "type": "View",
-        "viewType": "XML",
-        "path": "ehsm.view",
-        "async": true,
-        "viewPath": "ehsm.view"
-      },
-      "routes": [
-        {
-          "name": "RouteView1",
-          "pattern": ":?query:",
-          "target": [
-            "TargetView1"
-          ]
-        }
-      ],
-      "targets": {
-        "TargetView1": {
-          "id": "View1",
-          "name": "View1"
-        }
-      }
-    },
-    "rootView": {
-      "viewName": "ehsm.view.App",
-      "type": "XML",
-      "id": "App",
-      "async": true
     }
   }
 }

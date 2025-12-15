@@ -1,0 +1,50 @@
+<mvc:View
+    controllerName="ehsm.controller.Incident"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    height="100%">
+    <Page title="Incident Management" showNavButton="true" navButtonPress="onNavBack">
+        <subHeader>
+            <OverflowToolbar>
+                <SearchField id="searchField" search="onSearch" placeholder="Search Incidents..." width="auto"/>
+                <ToolbarSpacer/>
+                <Select id="selectStatus" change="onFilterSelect" forceSelection="false" placeholder="Status">
+                     <core:Item key="New" text="New" xmlns:core="sap.ui.core"/>
+                     <core:Item key="In Progress" text="In Progress" xmlns:core="sap.ui.core"/>
+                     <core:Item key="Closed" text="Closed" xmlns:core="sap.ui.core"/>
+                </Select>
+                <Select id="selectPriority" change="onFilterSelect" forceSelection="false" placeholder="Priority">
+                     <core:Item key="High" text="High" xmlns:core="sap.ui.core"/>
+                     <core:Item key="Medium" text="Medium" xmlns:core="sap.ui.core"/>
+                     <core:Item key="Low" text="Low" xmlns:core="sap.ui.core"/>
+                </Select>
+            </OverflowToolbar>
+        </subHeader>
+        <content>
+            <Table id="incidentTable" items="{path: '/ZSG_EHSM_INCIDENTSet', parameters: {expand: ''}}" growing="true" growingThreshold="10">
+                <columns>
+                    <Column><Text text="ID" /></Column>
+                    <Column><Text text="Description" /></Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Category" /></Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Priority" /></Column>
+                    <Column><Text text="Status" /></Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Date" /></Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Plant" /></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{IncidentId}"/>
+                            <Text text="{IncidentDescription}" />
+                            <Text text="{IncidentCategory}" />
+                            <ObjectStatus text="{IncidentPriority}" state="{= ${IncidentPriority} === 'High' ? 'Error' : ${IncidentPriority} === 'Medium' ? 'Warning' : 'Success' }"/>
+                            <ObjectStatus text="{IncidentStatus}" state="{= ${IncidentStatus} === 'New' ? 'Error' : ${IncidentStatus} === 'In Progress' ? 'Warning' : 'Success' }"/>
+                            <Text text="{path: 'IncidentDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium' }}" />
+                            <Text text="{Plant}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

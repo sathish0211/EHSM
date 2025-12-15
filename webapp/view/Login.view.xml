@@ -1,0 +1,31 @@
+<mvc:View
+    controllerName="ehsm.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    height="100%">
+    <Page showHeader="false" class="loginPage">
+        <FlexBox
+            height="100%"
+            alignItems="Center"
+            justifyContent="Center">
+            <f:Card class="sapUiMediumMargin" width="400px">
+                <f:header>
+                    <f:Header title="EHSM Safety Portal" subtitle="Login to continue" icon="sap-icon://shield"/>
+                </f:header>
+                <f:content>
+                    <VBox class="sapUiLargeMargin">
+                        <Label text="Employee ID" labelFor="inpEmpId" design="Bold"/>
+                        <Input id="inpEmpId" placeholder="Enter Employee ID" />
+                        
+                        <Label text="Password" labelFor="inpPass" design="Bold" class="sapUiSmallMarginTop"/>
+                        <Input id="inpPass" type="Password" placeholder="Enter Password" />
+
+                        <Button text="Login" type="Emphasized" press="onLogin" class="sapUiMediumMarginTop" width="100%"/>
+                    </VBox>
+                </f:content>
+            </f:Card>
+        </FlexBox>
+    </Page>
+</mvc:View>

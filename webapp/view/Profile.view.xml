@@ -1,0 +1,36 @@
+<mvc:View
+    controllerName="ehsm.controller.Profile"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    height="100%">
+    <Page title="My Profile" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <ObjectHeader
+                icon="sap-icon://employee"
+                title="{FirstName} {LastName}"
+                number="{EmployeeId}"
+                intro="{Company}"
+                responsive="true"
+                fullScreenOptimized="true"
+                class="sapUiResponsivePadding--header">
+                <statuses>
+                    <ObjectStatus text="{EmployeeStatus}" state="{= ${EmployeeStatus} === 'Active' ? 'Success' : 'Warning' }" />
+                </statuses>
+                <attributes>
+                     <ObjectAttribute title="Email" text="{EmailId}" />
+                     <ObjectAttribute title="Plant" text="{Plant}" />
+                </attributes>
+            </ObjectHeader>
+            
+            <form:SimpleForm title="Address Details" editable="false" layout="ResponsiveGridLayout">
+                <form:content>
+                    <Label text="City" />
+                    <Text text="{City}" />
+                    <Label text="Country" />
+                    <Text text="{Country}" />
+                </form:content>
+            </form:SimpleForm>
+        </content>
+    </Page>
+</mvc:View>

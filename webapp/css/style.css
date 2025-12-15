@@ -1,1 +1,16 @@
-/* Enter your custom styles here */
+/* Global Styles */
+.loginPage {
+    background-image: linear-gradient(to bottom right, #2c3e50, #2980b9);
+}
+
+.tileLayout {
+    margin-right: 0.5rem;
+}
+
+.sapMPageSubHeader {
+    background-color: transparent !important;
+}
+
+.sapUiMediumMargin {
+    margin: 1rem !important;
+}

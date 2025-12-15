@@ -1,0 +1,46 @@
+<mvc:View
+    controllerName="ehsm.controller.Dashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    height="100%">
+    <Page title="EHSM Safety Engineer Dashboard" showNavButton="true" navButtonPress="onNavBack">
+        <headerContent>
+            <Button icon="sap-icon://customer" text="Profile" press="onPressProfile"/>
+            <Button icon="sap-icon://log" press="onLogout"/>
+        </headerContent>
+        <content>
+            <l:VerticalLayout width="100%" class="sapUiMediumMargin">
+                <Title text="Key Performance Indicators" level="H2" class="sapUiSmallMarginBottom"/>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Incidents" subheader="Total" press="onPressIncidents">
+                    <TileContent>
+                        <NumericContent value="12" icon="sap-icon://alert" valueColor="Critical"/>
+                    </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Open Incidents" subheader="Action Required" press="onPressIncidents">
+                    <TileContent>
+                         <NumericContent value="5" icon="sap-icon://clipboard" valueColor="Error"/>
+                    </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Risks" subheader="Total Assessments" press="onPressRisks">
+                    <TileContent>
+                        <NumericContent value="8" icon="sap-icon://quality-issue" valueColor="Good"/>
+                    </TileContent>
+                </GenericTile>
+                 <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="High Risks" subheader="Mitigation Needed" press="onPressRisks">
+                    <TileContent>
+                        <NumericContent value="2" icon="sap-icon://warning" valueColor="Error"/>
+                    </TileContent>
+                </GenericTile>
+            </l:VerticalLayout>
+
+            <l:VerticalLayout width="100%" class="sapUiMediumMargin">
+                 <Title text="Quick Access" level="H2" class="sapUiSmallMarginBottom"/>
+                 <HBox>
+                    <Button text="Manage Incidents" type="Emphasized" icon="sap-icon://alert" class="sapUiSmallMarginEnd" press="onPressIncidents" width="200px"/>
+                    <Button text="Risk Assessment" type="Emphasized" icon="sap-icon://quality-issue" class="sapUiSmallMarginEnd" press="onPressRisks" width="200px"/>
+                 </HBox>
+            </l:VerticalLayout>
+        </content>
+    </Page>
+</mvc:View>
