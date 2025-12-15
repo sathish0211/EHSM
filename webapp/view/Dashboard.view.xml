@@ -14,22 +14,22 @@
                 <Title text="Key Performance Indicators" level="H2" class="sapUiSmallMarginBottom"/>
                 <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Incidents" subheader="Total" press="onPressIncidents">
                     <TileContent>
-                        <NumericContent value="12" icon="sap-icon://alert" valueColor="Critical"/>
+                        <NumericContent value="{dashboard>/totalIncidents}" icon="sap-icon://alert" valueColor="Critical"/>
                     </TileContent>
                 </GenericTile>
                 <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Open Incidents" subheader="Action Required" press="onPressIncidents">
                     <TileContent>
-                         <NumericContent value="5" icon="sap-icon://clipboard" valueColor="Error"/>
+                         <NumericContent value="{dashboard>/openIncidents}" icon="sap-icon://clipboard" valueColor="Error"/>
                     </TileContent>
                 </GenericTile>
                 <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Risks" subheader="Total Assessments" press="onPressRisks">
                     <TileContent>
-                        <NumericContent value="8" icon="sap-icon://quality-issue" valueColor="Good"/>
+                        <NumericContent value="{dashboard>/totalRisks}" icon="sap-icon://quality-issue" valueColor="Good"/>
                     </TileContent>
                 </GenericTile>
                  <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="High Risks" subheader="Mitigation Needed" press="onPressRisks">
                     <TileContent>
-                        <NumericContent value="2" icon="sap-icon://warning" valueColor="Error"/>
+                        <NumericContent value="{dashboard>/highRisks}" icon="sap-icon://warning" valueColor="Error"/>
                     </TileContent>
                 </GenericTile>
             </l:VerticalLayout>
