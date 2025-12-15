@@ -5,7 +5,14 @@
     height="100%">
     <Page title="Risk Assessment" showNavButton="true" navButtonPress="onNavBack">
         <content>
-            <Table id="riskTable" items="{path: '/ZSG_EHSM_RISKSet'}" growing="true" growingThreshold="10">
+            <Table id="riskTable" noDataText="No Risks Found" growing="true" growingThreshold="10">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Risk Assessment ({session>/EmployeeId})"/>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://refresh" press="onRefresh"/>
+                    </OverflowToolbar>
+                </headerToolbar>
                 <columns>
                     <Column><Text text="Risk ID" /></Column>
                     <Column><Text text="Description" /></Column>
