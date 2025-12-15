@@ -21,7 +21,14 @@
             </OverflowToolbar>
         </subHeader>
         <content>
-            <Table id="incidentTable" items="{path: '/ZSG_EHSM_INCIDENTSet', parameters: {expand: ''}}" growing="true" growingThreshold="10">
+            <Table id="incidentTable" noDataText="No Incidents Found" growing="true" growingThreshold="10">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Live Incidents ({session>/EmployeeId})"/>
+                        <ToolbarSpacer/>
+                        <Button icon="sap-icon://refresh" press="onRefresh"/>
+                    </OverflowToolbar>
+                </headerToolbar>
                 <columns>
                     <Column><Text text="ID" /></Column>
                     <Column><Text text="Description" /></Column>

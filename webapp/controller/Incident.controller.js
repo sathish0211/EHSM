@@ -17,14 +17,13 @@ sap.ui.define([
         },
 
         _onRouteMatched: function () {
-            this._applyFilters();
+            this._loadData();
         },
 
-        _applyFilters: function () {
+        _loadData: function () {
             var oSessionModel = this.getOwnerComponent().getModel("session");
-            var sEmpId = oSessionModel ? oSessionModel.getProperty("/EmployeeId") : "00000001"; // Fallback to 00000001
+            var sEmpId = oSessionModel ? oSessionModel.getProperty("/EmployeeId") : "00000001";
 
-            // Mandatory Filter by EmployeeId
             var aFilters = [new Filter("EmployeeId", FilterOperator.EQ, sEmpId)];
 
             // UI Filters
@@ -44,16 +43,42 @@ sap.ui.define([
             }
 
             var oTable = this.byId("incidentTable");
-            var oBinding = oTable.getBinding("items");
-            oBinding.filter(aFilters);
+
+            // Check if already bound
+            if (!oTable.getBinding("items")) {
+                oTable.bindItems({
+                    path: "/ZSG_EHSM_INCIDENTSet",
+                    template: new sap.m.ColumnListItem({
+                        cells: [
+                            new sap.m.ObjectIdentifier({ title: "{IncidentId}" }),
+                            new sap.m.Text({ text: "{IncidentDescription}" }),
+                            new sap.m.Text({ text: "{IncidentCategory}" }),
+                            new sap.m.ObjectStatus({ text: "{IncidentPriority}", state: { path: "IncidentPriority", formatter: function (sVal) { return sVal === 'High' ? 'Error' : sVal === 'Medium' ? 'Warning' : 'Success'; } } }),
+                            new sap.m.ObjectStatus({ text: "{IncidentStatus}", state: { path: "IncidentStatus", formatter: function (sVal) { return sVal === 'New' ? 'Error' : sVal === 'In Progress' ? 'Warning' : 'Success'; } } }),
+                            new sap.m.Text({ text: { path: "IncidentDate", type: "sap.ui.model.type.Date", formatOptions: { style: "medium" } } }),
+                            new sap.m.Text({ text: "{Plant}" })
+                        ]
+                    }),
+                    filters: aFilters
+                });
+            } else {
+                oTable.getBinding("items").filter(aFilters);
+            }
+        },
+
+        onRefresh: function () {
+            var oTable = this.byId("incidentTable");
+            if (oTable.getBinding("items")) {
+                oTable.getBinding("items").refresh(true);
+            }
         },
 
         onSearch: function () {
-            this._applyFilters();
+            this._loadData();
         },
 
         onFilterSelect: function () {
-            this._applyFilters();
+            this._loadData();
         },
 
         onNavBack: function () {
