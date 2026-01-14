@@ -18,7 +18,7 @@ server:
         backend:
           - path: /sap
             url: http://172.17.19.24:8000
-            destination: Demo
+            destination: PORTAL
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
