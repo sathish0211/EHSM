@@ -2,39 +2,92 @@
     controllerName="ehsm.controller.Risk"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     height="100%">
-    <Page title="Risk Assessment" showNavButton="true" navButtonPress="onNavBack">
+
+    <Page
+        title="Risk Assessment"
+        showNavButton="true"
+        navButtonPress="onNavBack">
+
         <content>
-            <Table id="riskTable" noDataText="No Risks Found" growing="true" growingThreshold="10">
+
+            <Table
+                id="riskTable"
+                items="{risks>/results}"
+                noDataText="No Risks Found"
+                growing="true"
+                growingThreshold="10">
+
+                <!-- HEADER -->
                 <headerToolbar>
                     <OverflowToolbar>
                         <Title text="Risk Assessment ({session>/EmployeeId})"/>
                         <ToolbarSpacer/>
-                        <Button icon="sap-icon://refresh" press="onRefresh"/>
+                        <Button
+                            icon="sap-icon://refresh"
+                            press="onRefresh"/>
                     </OverflowToolbar>
                 </headerToolbar>
+
+                <!-- COLUMNS -->
                 <columns>
-                    <Column><Text text="Risk ID" /></Column>
-                    <Column><Text text="Description" /></Column>
-                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Category" /></Column>
-                    <Column><Text text="Severity" /></Column>
-                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Likelihood" /></Column>
-                    <Column minScreenWidth="Desktop" demandPopin="true"><Text text="Mitigation" /></Column>
-                    <Column minScreenWidth="Tablet" demandPopin="true"><Text text="Plant" /></Column>
+                    <Column><Text text="Risk ID"/></Column>
+                    <Column><Text text="Description"/></Column>
+                    <Column><Text text="Category"/></Column>
+                    <Column><Text text="Severity"/></Column>
+                    <Column><Text text="Likelihood"/></Column>
+                    <Column><Text text="Mitigation"/></Column>
+                    <Column><Text text="Plant"/></Column>
+                    <Column><Text text="Created By"/></Column>
+                    <Column><Text text="Identification Date"/></Column>
                 </columns>
+
+                <!-- ROW TEMPLATE -->
                 <items>
                     <ColumnListItem>
                         <cells>
-                            <ObjectIdentifier title="{RiskId}"/>
-                            <Text text="{RiskDescription}" />
-                            <Text text="{RiskCategory}" />
-                            <ObjectStatus text="{RiskSeverity}" state="{= ${RiskSeverity} === 'High' ? 'Error' : ${RiskSeverity} === 'Medium' ? 'Warning' : 'Success' }"/>
-                            <Text text="{Likelihood}" />
-                            <Text text="{MitigationMeasures}" />
-                            <Text text="{Plant}" />
+
+                            <ObjectIdentifier
+                                title="{risks>RiskId}"/>
+
+                            <Text
+                                text="{risks>RiskDescription}"/>
+
+                            <Text
+                                text="{risks>RiskCategory}"/>
+
+                            <ObjectStatus
+                                text="{risks>RiskSeverity}"
+                                state="{= ${risks>RiskSeverity} === 'High' 
+                                    ? 'Error' 
+                                    : ${risks>RiskSeverity} === 'Medium' 
+                                    ? 'Warning' 
+                                    : 'Success' }"/>
+
+                            <Text
+                                text="{risks>Likelihood}"/>
+
+                            <Text
+                                text="{risks>MitigationMeasures}"/>
+
+                            <Text
+                                text="{risks>Plant}"/>
+
+                            <Text
+                                text="{risks>CreatedBy}"/>
+
+                            <Text
+                                text="{
+                                    path: 'risks>RiskIdentificationDate',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: { pattern: 'dd-MM-yyyy' }
+                                }"/>
+
                         </cells>
                     </ColumnListItem>
                 </items>
+
             </Table>
         </content>
     </Page>
