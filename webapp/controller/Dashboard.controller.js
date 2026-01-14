@@ -120,9 +120,9 @@ sap.ui.define([
             });
         },
 
-        onPressProfile: function () {
-            this.getRouter().navTo("Profile");
-        },
+        // onPressProfile: function () {
+        //     this.getRouter().navTo("Profile");
+        // },
 
         onPressIncidents: function () {
             this.getRouter().navTo("Incident");

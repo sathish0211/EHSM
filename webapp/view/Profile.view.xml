@@ -1,4 +1,4 @@
-<mvc:View
+<!-- <mvc:View
     controllerName="ehsm.controller.Profile"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
@@ -33,4 +33,4 @@
             </form:SimpleForm>
         </content>
     </Page>
-</mvc:View>
+</mvc:View> -->

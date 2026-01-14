@@ -6,7 +6,7 @@
     height="100%">
     <Page title="EHSM Safety Engineer Dashboard" showNavButton="true" navButtonPress="onNavBack">
         <headerContent>
-            <Button icon="sap-icon://customer" text="Profile" press="onPressProfile"/>
+            <!-- <Button icon="sap-icon://customer" text="Profile" press="onPressProfile"/> -->
             <Button icon="sap-icon://log" press="onLogout"/>
         </headerContent>
         <content>
